@@ -1,0 +1,9 @@
+C:\Users\Cesar\Desktop\Procedures\Procedures\bin\Debug\Procedures.exe.config
+C:\Users\Cesar\Desktop\Procedures\Procedures\bin\Debug\Procedures.exe
+C:\Users\Cesar\Desktop\Procedures\Procedures\bin\Debug\Procedures.pdb
+C:\Users\Cesar\Desktop\Procedures\Procedures\obj\Debug\Procedures.csprojResolveAssemblyReference.cache
+C:\Users\Cesar\Desktop\Procedures\Procedures\obj\Debug\Procedures.Form1.resources
+C:\Users\Cesar\Desktop\Procedures\Procedures\obj\Debug\Procedures.Properties.Resources.resources
+C:\Users\Cesar\Desktop\Procedures\Procedures\obj\Debug\Procedures.csproj.GenerateResource.Cache
+C:\Users\Cesar\Desktop\Procedures\Procedures\obj\Debug\Procedures.exe
+C:\Users\Cesar\Desktop\Procedures\Procedures\obj\Debug\Procedures.pdb
