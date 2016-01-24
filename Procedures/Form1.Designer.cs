@@ -35,30 +35,47 @@
             this.cboServidor = new System.Windows.Forms.ComboBox();
             this.cboTablas = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbxCOD = new System.Windows.Forms.TextBox();
+            this.tbxNUM = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.cboBD = new System.Windows.Forms.ComboBox();
+            this.dgvAtributos = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.btnInsertarDatos = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAtributos)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGenerar
             // 
-            this.btnGenerar.Location = new System.Drawing.Point(370, 552);
+            this.btnGenerar.Location = new System.Drawing.Point(235, 21);
             this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerar.Size = new System.Drawing.Size(165, 27);
             this.btnGenerar.TabIndex = 0;
-            this.btnGenerar.Text = "Generar";
+            this.btnGenerar.Text = "Generar Insert";
             this.btnGenerar.UseVisualStyleBackColor = true;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // txtS
             // 
-            this.txtS.Location = new System.Drawing.Point(66, 225);
+            this.txtS.Location = new System.Drawing.Point(12, 250);
             this.txtS.Name = "txtS";
-            this.txtS.Size = new System.Drawing.Size(720, 306);
+            this.txtS.Size = new System.Drawing.Size(580, 306);
             this.txtS.TabIndex = 1;
             this.txtS.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(59, 38);
+            this.label1.Location = new System.Drawing.Point(15, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 2;
@@ -67,7 +84,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(63, 99);
+            this.label2.Location = new System.Drawing.Point(15, 93);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 3;
@@ -76,7 +93,7 @@
             // cboServidor
             // 
             this.cboServidor.FormattingEnabled = true;
-            this.cboServidor.Location = new System.Drawing.Point(133, 41);
+            this.cboServidor.Location = new System.Drawing.Point(89, 21);
             this.cboServidor.Name = "cboServidor";
             this.cboServidor.Size = new System.Drawing.Size(121, 21);
             this.cboServidor.TabIndex = 4;
@@ -84,25 +101,162 @@
             // cboTablas
             // 
             this.cboTablas.FormattingEnabled = true;
-            this.cboTablas.Location = new System.Drawing.Point(133, 91);
+            this.cboTablas.Location = new System.Drawing.Point(89, 93);
             this.cboTablas.Name = "cboTablas";
             this.cboTablas.Size = new System.Drawing.Size(121, 21);
             this.cboTablas.TabIndex = 5;
+            this.cboTablas.SelectedIndexChanged += new System.EventHandler(this.cboTablas_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(62, 150);
+            this.label3.Location = new System.Drawing.Point(15, 54);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 13);
+            this.label3.Size = new System.Drawing.Size(22, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Atributos";
+            this.label3.Text = "BD";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(30, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "COD";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 61);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "NUM";
+            // 
+            // tbxCOD
+            // 
+            this.tbxCOD.Location = new System.Drawing.Point(75, 28);
+            this.tbxCOD.Name = "tbxCOD";
+            this.tbxCOD.Size = new System.Drawing.Size(100, 20);
+            this.tbxCOD.TabIndex = 2;
+            // 
+            // tbxNUM
+            // 
+            this.tbxNUM.Location = new System.Drawing.Point(75, 54);
+            this.tbxNUM.Name = "tbxNUM";
+            this.tbxNUM.Size = new System.Drawing.Size(100, 20);
+            this.tbxNUM.TabIndex = 3;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tbxNUM);
+            this.groupBox1.Controls.Add(this.tbxCOD);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Location = new System.Drawing.Point(18, 132);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(192, 100);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Auto-Generar ";
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(438, 25);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(154, 23);
+            this.btnUpdate.TabIndex = 8;
+            this.btnUpdate.Text = "UPDATE";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // cboBD
+            // 
+            this.cboBD.FormattingEnabled = true;
+            this.cboBD.Location = new System.Drawing.Point(89, 54);
+            this.cboBD.Name = "cboBD";
+            this.cboBD.Size = new System.Drawing.Size(121, 21);
+            this.cboBD.TabIndex = 9;
+            this.cboBD.SelectedIndexChanged += new System.EventHandler(this.cboBD_SelectedIndexChanged);
+            // 
+            // dgvAtributos
+            // 
+            this.dgvAtributos.AllowUserToAddRows = false;
+            this.dgvAtributos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAtributos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column2});
+            this.dgvAtributos.Location = new System.Drawing.Point(620, 21);
+            this.dgvAtributos.Name = "dgvAtributos";
+            this.dgvAtributos.Size = new System.Drawing.Size(247, 578);
+            this.dgvAtributos.TabIndex = 10;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Columna";
+            this.Column1.Name = "Column1";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "TipoDato";
+            this.Column3.Name = "Column3";
+            this.Column3.Visible = false;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Len";
+            this.Column4.Name = "Column4";
+            this.Column4.Visible = false;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Nulo";
+            this.Column5.Name = "Column5";
+            this.Column5.Visible = false;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Escoger";
+            this.Column2.Name = "Column2";
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.Location = new System.Drawing.Point(235, 75);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(165, 31);
+            this.btnSelect.TabIndex = 11;
+            this.btnSelect.Text = "Select";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
+            // btnInsertarDatos
+            // 
+            this.btnInsertarDatos.Location = new System.Drawing.Point(438, 76);
+            this.btnInsertarDatos.Name = "btnInsertarDatos";
+            this.btnInsertarDatos.Size = new System.Drawing.Size(154, 31);
+            this.btnInsertarDatos.TabIndex = 12;
+            this.btnInsertarDatos.Text = "INSERTAR DATOS";
+            this.btnInsertarDatos.UseVisualStyleBackColor = true;
+            this.btnInsertarDatos.Click += new System.EventHandler(this.btnInsertarDatos_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(857, 603);
+            this.ClientSize = new System.Drawing.Size(897, 615);
+            this.Controls.Add(this.btnInsertarDatos);
+            this.Controls.Add(this.btnSelect);
+            this.Controls.Add(this.dgvAtributos);
+            this.Controls.Add(this.cboBD);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cboTablas);
             this.Controls.Add(this.cboServidor);
@@ -113,6 +267,9 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAtributos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,6 +284,23 @@
         private System.Windows.Forms.ComboBox cboServidor;
         private System.Windows.Forms.ComboBox cboTablas;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tbxCOD;
+        private System.Windows.Forms.TextBox tbxNUM;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.ComboBox cboBD;
+        private System.Windows.Forms.DataGridView dgvAtributos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column2;
+        private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.Button btnInsertarDatos;
+
+
     }
 }
 
