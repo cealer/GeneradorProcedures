@@ -37,3 +37,14 @@ C:\Users\Cesar\Documents\archivos\Nueva carpeta (3)\PROYECTOS\Procedures2\Proced
 C:\Users\Cesar\Documents\archivos\Nueva carpeta (3)\PROYECTOS\Procedures2\Procedures\obj\Debug\Procedures.Form1.resources
 C:\Users\Cesar\Documents\archivos\Nueva carpeta (3)\PROYECTOS\Procedures2\Procedures\obj\Debug\Procedures.Properties.Resources.resources
 C:\Users\Cesar\Documents\archivos\Nueva carpeta (3)\PROYECTOS\Procedures2\Procedures\obj\Debug\Procedures.csproj.GenerateResource.Cache
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\bin\Debug\Procedures.exe.config
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\obj\Debug\Procedures.exe
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\obj\Debug\Procedures.pdb
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\bin\Debug\Procedures.exe
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\bin\Debug\Procedures.pdb
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\obj\Debug\Procedures.csprojResolveAssemblyReference.cache
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\obj\Debug\Procedures.Form1.resources
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\obj\Debug\Procedures.GeneradoCodigo.resources
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\obj\Debug\Procedures.Properties.Resources.resources
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\obj\Debug\Procedures.csproj.GenerateResource.Cache
+C:\Users\Cesar\Documents\GitHub\Procedures2\Procedures\obj\Debug\Procedures.Principal.resources

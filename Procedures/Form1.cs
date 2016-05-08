@@ -23,7 +23,13 @@ namespace Procedures
         List<Atributos> Atributos = new List<Atributos>();
         List<string> ListaBD = new List<string>();
         List<string> ListaCampos = new List<string>();
+        List<Atributos> listaAtrib = new List<Atributos>();
+        List<Atributos> listaBuscar = new List<Atributos>();
 
+        List<Atributos> listaInnerJoinCampos = new List<Atributos>();
+
+
+        const string Comillas = "\"";
         string filename;
         string server = @"CEALER-PC\CEALER";
 
@@ -52,14 +58,15 @@ namespace Procedures
                 if (!item.ToString().Equals(actual.ToString()))
                 {
                     cboTablas.Items.Add(item);
+                    cboTablaSelect.Items.Add(item);
                 }
                 actual = item;
             }
         }
 
-        void ObtenerAtributos(string servidor, string baseDatos, string tabla)
+        void ObtenerAtributosEspecial(string servidor, string baseDatos, string tabla)
         {
-            string query = string.Format("Select  i.COLUMN_NAME,CONVERT(text,i.DATA_TYPE),CONVERT(text,i.IS_NULLABLE),CONVERT(nvarchar,i.CHARACTER_MAXIMUM_LENGTH) from information_schema.columns i WHERE TABLE_NAME='{0}'", tabla);
+            string query = string.Format("Select TABLE_NAME+'.'+i.COLUMN_NAME,CONVERT(text,i.DATA_TYPE),CONVERT(text,i.IS_NULLABLE),CONVERT(nvarchar,i.CHARACTER_MAXIMUM_LENGTH) from information_schema.columns i WHERE TABLE_NAME='{0}'", tabla);
             string cadenaConexion = string.Format(@"Data Source={0};Initial Catalog={1};Integrated Security=True", servidor, baseDatos);
             SqlConnection cn = new SqlConnection(cadenaConexion);
             SqlCommand cmd = new SqlCommand(query, cn);
@@ -72,6 +79,36 @@ namespace Procedures
             cn.Close();
         }
 
+        void ObtenerAtributos(string servidor, string baseDatos, string tabla)
+        {
+            string query = string.Format("Select i.COLUMN_NAME,CONVERT(text,i.DATA_TYPE),CONVERT(text,i.IS_NULLABLE),CONVERT(nvarchar,i.CHARACTER_MAXIMUM_LENGTH) from information_schema.columns i WHERE TABLE_NAME='{0}'", tabla);
+            string cadenaConexion = string.Format(@"Data Source={0};Initial Catalog={1};Integrated Security=True", servidor, baseDatos);
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+            SqlCommand cmd = new SqlCommand(query, cn);
+            cn.Open();
+            var lista = cmd.ExecuteReader();
+            while (lista.Read())
+            {
+                Atributos.Add(new Atributos(lista.GetString(0), lista.GetString(1), lista.GetValue(3).ToString(), lista.GetValue(2).ToString()));
+            }
+            cn.Close();
+        }
+
+
+        void ObtenerInnerJoinCampos(string servidor, string baseDatos, string tabla)
+        {
+            string query = string.Format("Select TABLE_NAME+'.'+i.COLUMN_NAME,CONVERT(text,i.DATA_TYPE),CONVERT(text,i.IS_NULLABLE),CONVERT(nvarchar,i.CHARACTER_MAXIMUM_LENGTH) from information_schema.columns i WHERE TABLE_NAME='{0}'", tabla);
+            string cadenaConexion = string.Format(@"Data Source={0};Initial Catalog={1};Integrated Security=True", servidor, baseDatos);
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+            SqlCommand cmd = new SqlCommand(query, cn);
+            cn.Open();
+            var lista = cmd.ExecuteReader();
+            while (lista.Read())
+            {
+                listaInnerJoinCampos.Add(new Atributos(lista.GetString(0), lista.GetString(1), lista.GetValue(3).ToString(), lista.GetValue(2).ToString()));
+            }
+            cn.Close();
+        }
 
         void GuardarArchivo()
         {
@@ -113,10 +150,6 @@ namespace Procedures
                 cboBD.Items.Add(item.ToString());
             }
         }
-
-        List<Atributos> listaAtrib = new List<Atributos>();
-
-        Atributos aux;
 
         public void ProcedureUpdate(string servidor, string baseDatos, string tabla)
         {
@@ -249,6 +282,7 @@ namespace Procedures
                 else
                 {
                     id = text = ("@" + atri.Nombre + " " + atri.tipoDato + "(" + atri.length + ")");
+
                     campoIncrementar = atri.Nombre;
                 }
             }
@@ -305,7 +339,6 @@ namespace Procedures
             #endregion
         }
 
-
         public void imprimir(string cad)
         {
             txtS.AppendText(cad + "\r\n");
@@ -360,6 +393,7 @@ namespace Procedures
         private void cboBD_SelectedIndexChanged(object sender, EventArgs e)
         {
             ObtenerTablas(server, cboBD.SelectedItem.ToString());
+
         }
 
         public string UPDATE()
@@ -401,10 +435,22 @@ namespace Procedures
         {
             dgvAtributos.Rows.Clear();
             ObtenerAtributos(server, cboBD.SelectedItem.ToString(), cboTablas.SelectedItem.ToString());
+
+            string tabla = Consultas.getTablaForeign(cboTablas.SelectedItem.ToString());
+
+            ObtenerInnerJoinCampos(server, cboBD.SelectedItem.ToString(), tabla);
+
             foreach (var item in Atributos)
             {
                 dgvAtributos.Rows.Add(item.Nombre, item.tipoDato, item.length, item.TipoNull, true);
+                dgvListaWhere.Rows.Add(item.Nombre, item.tipoDato, item.length, item.TipoNull, true);
             }
+
+            foreach (var item in listaInnerJoinCampos)
+            {
+                dgvAtributos.Rows.Add(item.Nombre, item.tipoDato, item.length, item.TipoNull, true);
+            }
+
         }
 
         //Botones
@@ -433,9 +479,38 @@ namespace Procedures
 
         public void ProcedureSelect(string servidor, string baseDatos, string tabla)
         {
+            string text = "";
+
+            foreach (DataGridViewRow elemento in dgvListaWhere.Rows)
+            {
+                if ((bool)(elemento.Cells[4].Value) == true)
+                {
+                    listaBuscar.Add(new Atributos(elemento.Cells[0].Value.ToString(), "nvarchar", elemento.Cells[2].Value.ToString(), elemento.Cells[3].Value.ToString()));
+                }
+            }
+
+            int maxBuscar = listaBuscar.Count;
+
             txtS.AppendText("USE " + cboBD.SelectedItem.ToString() + " \r\n");
             txtS.AppendText("GO " + " \r\n");
             txtS.AppendText("CREATE PROCEDURE SPU_BUSCAR_" + tabla + "\r\n");
+
+            foreach (var item in listaBuscar)
+            {
+                maxBuscar--;
+
+                if (maxBuscar == 0)
+                {
+                    text = $"@{Regex.Replace(item.Nombre, @"[.]", "")} {item.tipoDato} ({item.length}) ";
+                }
+                else
+                {
+                    text = $"@{Regex.Replace(item.Nombre, @"[.]", "")} {item.tipoDato}({item.length}), ";
+                }
+
+                txtS.AppendText(text + "\r\n");
+            }
+
             txtS.AppendText("AS" + "\r\n");
             txtS.AppendText("Select ");
             string query = string.Format("Select  i.COLUMN_NAME,CONVERT(text,i.DATA_TYPE),CONVERT(text,i.IS_NULLABLE),CONVERT(nvarchar,i.CHARACTER_MAXIMUM_LENGTH) from information_schema.columns i WHERE TABLE_NAME='{0}'", tabla);
@@ -444,7 +519,7 @@ namespace Procedures
             SqlCommand cmd = new SqlCommand(query, cn);
             cn.Open();
             var lista = cmd.ExecuteReader();
-            string text = "";
+            text = "";
 
             foreach (DataGridViewRow elemento in dgvAtributos.Rows)
             {
@@ -455,6 +530,7 @@ namespace Procedures
             }
 
             int max = listaAtrib.Count;
+            maxBuscar = listaBuscar.Count;
 
             foreach (var item in listaAtrib)
             {
@@ -469,18 +545,50 @@ namespace Procedures
                 }
                 txtS.AppendText(text);
             }
-            txtS.AppendText(" From " + tabla + "\r\n");
-            txtS.AppendText("GO");
+            txtS.AppendText(" From " + tabla);
+
+            //Crear InnerJoin
+
+            Consultas aux = new Consultas();
+
+            var listaInner = aux.getGenerarRelacion(tabla);
+
+            foreach (var item in listaInner)
+            {
+                txtS.AppendText($@" INNER JOIN {item.PK_Tabla} ON {item.PK_Tabla}.{item.PK_Columna} = {tabla}.{item.FK_Columna} ");
+            }
+
+            txtS.AppendText(" WHERE ");
+
+            foreach (var item in listaBuscar)
+            {
+                maxBuscar--;
+                if (maxBuscar == 0)
+                {
+                    text = item.Nombre + $" like @{Regex.Replace(item.Nombre, @"[.]", "")} + '%' ";
+                }
+                else
+                {
+                    text = item.Nombre + $" like @{Regex.Replace(item.Nombre, @"[.]", "")}+ '%' AND ";
+                }
+                txtS.AppendText(text);
+
+            }
+            txtS.AppendText($" AND {tabla}.Estado='1' ");
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            ProcedureSelect(server, cboBD.SelectedItem.ToString(), cboTablas.SelectedItem.ToString());
+            if (cboTablaSelect.Items.Count > 0)
+            {
+                ProcedureSelect(server, cboBD.SelectedItem.ToString(), cboTablaSelect.SelectedItem.ToString());
+            }
+            else
+            {
+                ProcedureSelect(server, cboBD.SelectedItem.ToString(), cboTablas.SelectedItem.ToString());
+            }
 
         }
-
-
-
 
         void Insert1CampoNvarchar(string archivo)
         {
@@ -535,13 +643,55 @@ namespace Procedures
             }
         }
 
+        private void btrnReiniciar_Click(object sender, EventArgs e)
+        {
+            listaAtrib.Clear();
+            ListaBD.Clear();
+            ListaCampos.Clear();
+            ListaTablas.Clear();
+            dgvAtributos.Rows.Clear();
+            txtS.Clear();
+            tbxCOD.Clear();
+            tbxNUM.Clear();
+        }
+
+        private void btnEstado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscarInnerJOin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboTablaSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgvAtributos.Rows.Clear();
+            ObtenerAtributosEspecial(server, cboBD.SelectedItem.ToString(), cboTablaSelect.SelectedItem.ToString());
+
+            string tabla = Consultas.getTablaForeign(cboTablaSelect.SelectedItem.ToString());
+
+            ObtenerInnerJoinCampos(server, cboBD.SelectedItem.ToString(), tabla);
+
+            foreach (var item in Atributos)
+            {
+                dgvAtributos.Rows.Add(item.Nombre, item.tipoDato, item.length, item.TipoNull, true);
+                dgvListaWhere.Rows.Add(item.Nombre, item.tipoDato, item.length, item.TipoNull, true);
+            }
+
+            foreach (var item in listaInnerJoinCampos)
+            {
+                dgvAtributos.Rows.Add(item.Nombre, item.tipoDato, item.length, item.TipoNull, true);
+            }
+        }
+
         private void btnInsertarDatos_Click(object sender, EventArgs e)
         {
             //Insert1CampoNvarchar("CARGO");
             //Insert1CampoNvarchar("DEPARTAMENTOS");
             //Insert1CampoNvarchar("COLEGIO_PROFESIONAL");
             //Insert1CampoNvarchar("AREA");
-
         }
     }
 }

@@ -50,8 +50,21 @@
             this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnInsertarDatos = new System.Windows.Forms.Button();
+            this.btrnReiniciar = new System.Windows.Forms.Button();
+            this.btnEstado = new System.Windows.Forms.Button();
+            this.dgvListaWhere = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cboTablaSelect = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAtributos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListaWhere)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGenerar
@@ -154,7 +167,7 @@
             this.groupBox1.Controls.Add(this.tbxCOD);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(18, 132);
+            this.groupBox1.Location = new System.Drawing.Point(235, 144);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(192, 100);
             this.groupBox1.TabIndex = 7;
@@ -190,7 +203,7 @@
             this.Column4,
             this.Column5,
             this.Column2});
-            this.dgvAtributos.Location = new System.Drawing.Point(620, 21);
+            this.dgvAtributos.Location = new System.Drawing.Point(619, 43);
             this.dgvAtributos.Name = "dgvAtributos";
             this.dgvAtributos.Size = new System.Drawing.Size(247, 578);
             this.dgvAtributos.TabIndex = 10;
@@ -246,20 +259,129 @@
             this.btnInsertarDatos.UseVisualStyleBackColor = true;
             this.btnInsertarDatos.Click += new System.EventHandler(this.btnInsertarDatos_Click);
             // 
+            // btrnReiniciar
+            // 
+            this.btrnReiniciar.Location = new System.Drawing.Point(482, 128);
+            this.btrnReiniciar.Name = "btrnReiniciar";
+            this.btrnReiniciar.Size = new System.Drawing.Size(75, 23);
+            this.btrnReiniciar.TabIndex = 13;
+            this.btrnReiniciar.Text = "Reiniciar";
+            this.btrnReiniciar.UseVisualStyleBackColor = true;
+            this.btrnReiniciar.Click += new System.EventHandler(this.btrnReiniciar_Click);
+            // 
+            // btnEstado
+            // 
+            this.btnEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEstado.Location = new System.Drawing.Point(438, 177);
+            this.btnEstado.Name = "btnEstado";
+            this.btnEstado.Size = new System.Drawing.Size(165, 58);
+            this.btnEstado.TabIndex = 11;
+            this.btnEstado.Text = "Generar Cambio Estado";
+            this.btnEstado.UseVisualStyleBackColor = true;
+            this.btnEstado.Click += new System.EventHandler(this.btnEstado_Click);
+            // 
+            // dgvListaWhere
+            // 
+            this.dgvListaWhere.AllowUserToAddRows = false;
+            this.dgvListaWhere.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListaWhere.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewCheckBoxColumn1});
+            this.dgvListaWhere.Location = new System.Drawing.Point(872, 43);
+            this.dgvListaWhere.Name = "dgvListaWhere";
+            this.dgvListaWhere.Size = new System.Drawing.Size(247, 578);
+            this.dgvListaWhere.TabIndex = 14;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Columna";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "TipoDato";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Len";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Nulo";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Visible = false;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.HeaderText = "Escoger";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(712, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Campos consultas";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(972, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Campos where";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(15, 138);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Tabla Select";
+            // 
+            // cboTablaSelect
+            // 
+            this.cboTablaSelect.FormattingEnabled = true;
+            this.cboTablaSelect.Location = new System.Drawing.Point(89, 135);
+            this.cboTablaSelect.Name = "cboTablaSelect";
+            this.cboTablaSelect.Size = new System.Drawing.Size(121, 21);
+            this.cboTablaSelect.TabIndex = 5;
+            this.cboTablaSelect.SelectedIndexChanged += new System.EventHandler(this.cboTablaSelect_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 615);
+            this.ClientSize = new System.Drawing.Size(1131, 638);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.dgvListaWhere);
+            this.Controls.Add(this.btrnReiniciar);
             this.Controls.Add(this.btnInsertarDatos);
+            this.Controls.Add(this.btnEstado);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.dgvAtributos);
             this.Controls.Add(this.cboBD);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.cboTablaSelect);
             this.Controls.Add(this.cboTablas);
             this.Controls.Add(this.cboServidor);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtS);
@@ -270,6 +392,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAtributos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListaWhere)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -299,8 +422,18 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column2;
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Button btnInsertarDatos;
-
-
+        private System.Windows.Forms.Button btrnReiniciar;
+        private System.Windows.Forms.Button btnEstado;
+        private System.Windows.Forms.DataGridView dgvListaWhere;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cboTablaSelect;
     }
 }
 
